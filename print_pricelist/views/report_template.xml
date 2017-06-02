@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="product_price_list">
+        <t t-call="report.html_container">
+            <div class="page">
+                <h3>Products price report</h3>
+                <p>Create User: <span t-esc="user.name"/></p>
+                <p>Create date: <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/> </p>
+                <div class="row">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Product name</th>
+                                <th class="text-left">Cost</th>
+                                <th class="text-left">Sale price</th>
+                            </tr>
+                        </thead>
+                        <t t-foreach="docs" t-as="o">
+                            <tr>
+                                <td>
+                                    <span t-esc="o.name"/>
+                                </td>
+                                <th class="text-left">
+                                    <span t-esc="o.standard_price"/>
+                                    <span t-esc="o.company_id.currency_id.symbol"/>
+                                </th>
+                                <th class="text-left">
+                                    <span t-esc="o.list_price"/>
+                                    <span t-esc="o.company_id.currency_id.symbol"/>
+                                </th>
+                            </tr>
+                        </t>
+                    </table>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

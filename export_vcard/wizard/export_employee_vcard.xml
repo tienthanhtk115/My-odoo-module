@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="wizard_employee_vcard" model="ir.ui.view">
+            <field name="name">Export Employee</field>
+            <field name="model">hr.employee</field>
+            <field name="priority" eval="999"/>
+            <field name="arch" type="xml">
+                <form string="Export Employee">
+                    <group>
+                        <p>Here is the exported file:
+                            <field name="data" readonly="1" filename="file_name"/>
+                        </p>
+                    </group>
+                    <footer>
+                        <button special="cancel" string="Close" type="object" class="btn-primary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_wizard_export_employee" model="ir.actions.act_window">
+            <field name="name">Export Employee</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.employee</field>
+            <field name="src_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <!--<act_window name="Export Employee"-->
+                    <!--res_model="hr.employee"-->
+                    <!--src_model="hr.employee"-->
+                    <!--view_mode="form"-->
+                    <!--multi="True"-->
+                    <!--target="new"-->
+                    <!--id="action_export_vcard"-->
+        <!--/>-->
+    </data>
+</odoo>

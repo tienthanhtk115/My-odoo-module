@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="wizard_export_model" model="ir.ui.view">
+            <field name="name">Export Model</field>
+            <field name="model">export.module</field>
+            <field name="arch" type="xml">
+                <form string="Export Module">
+                    <field invisible="1" name="state"/>
+                    <field name="name" invisible="1"/>
+                    <group states="choose" string="Export Settings">
+                        <field name="ir_model"/>
+                        <p>
+                            <field name="model_fields" widget="many2many_tags"/>
+                        </p>
+                    </group>
+                    <div states="get">
+                        <h2>Export Complete</h2>
+                        <p>Here is the exported file:
+                            <field name="data" readonly="1" filename="name"/>
+                        </p>
+                    </div>
+                    <footer states="choose">
+                        <button name="do_export2" string="Export" type="object" class="btn-primary"/>
+                        <button special="cancel" string="Cancel" type="object" class="btn-default"/>
+                    </footer>
+                    <footer states="get">
+                        <button special="cancel" string="Close" type="object" class="btn-primary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_wizard_export_model" model="ir.actions.act_window">
+            <field name="name">Export Module</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">export.module</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_wizard_lang_export11" action="action_wizard_export_model"/>
+    </data>
+</odoo>

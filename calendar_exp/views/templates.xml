@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <template id="assets_backend_2" name="web_export_view assets_1" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/calendar_exp/static/src/js/web_export_view.js"></script>
+        </xpath>
+    </template>
+</odoo>

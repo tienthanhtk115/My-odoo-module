@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="inherit_button_popup_view" model="ir.ui.view">
+        <field name="name">view.popup.inherit</field>
+        <field name="model">calendar.event</field>
+        <field name="inherit_id" ref="calendar.view_calendar_event_form_popup"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/group/." position="inside">
+                <button type="object" name="download" class="oe_stat_button" icon="fa-archive"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="inherit_button_form_view" model="ir.ui.view">
+        <field name="name">view.form.inherit</field>
+        <field name="model">calendar.event</field>
+        <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/div/h1" position="after">
+                <button class="btn btn-sm btn-primary update_sales_button" type="object" name="download" icon="fa-archive">Download
+                </button>
+                <br></br>
+            </xpath>
+        </field>
+    </record>
+</odoo>

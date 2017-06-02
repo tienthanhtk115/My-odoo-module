@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="hdhdh___dhdh" model="ir.ui.view">
+        <field name="name">test</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_supplier_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[1]" position="replace">
+                <page string="Bill">
+                    <field context="{'type': type, 'journal_id': journal_id}" name="invoice_line_ids">
+                        <tree string="Bill lines" editable="bottom">
+                            <field name="sequence" widget="handle"/>
+                            <field name="product_id"
+                                   context="{'partner_id': parent.partner_id}"/>
+                            <field name="name"/>
+                            <field name="company_id" invisible="1"/>
+                            <field name="account_id" groups="account.group_account_user"
+                                   domain="[('company_id', '=', parent.company_id), ('internal_type', '=', 'other')]"/>
+                            <field name="account_analytic_id" groups="analytic.group_analytic_accounting"
+                                   domain="[('company_id', '=', parent.company_id)]"/>
+                            <field name="analytic_tag_ids" groups="analytic.group_analytic_accounting"
+                                   widget="many2many_tags"/>
+                            <field name="quantity"/>
+                            <field name="uom_id" groups="product.group_uom"/>
+                            <field name="price_unit"/>
+                            <field name="discount" groups="base.group_no_one"/>
+                            <field name="invoice_line_tax_ids" widget="many2many_tags" context="{'type':parent.type}"
+                                   domain="[('type_tax_use','=','purchase'),('company_id', '=', parent.company_id)]"
+                                   options="{'no_create': True}"/>
+                            <field name="price_subtotal"/>
+                            <field name="currency_id" invisible="1"/>
+                        </tree>
+                    </field>
+                    <group>
+                        <group>
+                            <div class="oe_inline">
+                                <field name="tax_line_ids">
+                                    <tree editable="bottom" string="Taxes">
+                                        <field name="name"/>
+                                        <!--Need invisible fields for on_change to create all necessary info -->
+                                        <field name="tax_id" invisible="1"/>
+                                        <field name="sequence" invisible="1"/>
+                                        <field name="manual" invisible="1"/>
+                                        <field name="account_id" groups="account.group_account_invoice"/>
+                                        <field name="account_analytic_id"
+                                               domain="[('company_id', '=', parent.company_id)]"
+                                               groups="analytic.group_analytic_accounting"/>
+                                        <field name="amount"/>
+                                        <field name="currency_id" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </div>
+                        </group>
+                        <group class="oe_subtotal_footer oe_right">
+                            <field name="amount_untaxed"/>
+                            <field name="amount_tax"/>
+                            <field name="amount_total" class="oe_subtotal_footer_separator"/>
+                            <field name="payments_widget" colspan="2" nolabel="1" widget="payment"/>
+                            <field name="residual" class="oe_subtotal_footer_separator"
+                                   attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                            <field name="reconciled" invisible="1"/>
+                            <field name="outstanding_credits_debits_widget" colspan="2" nolabel="1" widget="payment"
+                                   attrs="{'invisible': [('state', 'not in', 'open')]}"/>
+                        </group>
+                    </group>
+                     <div>
+                        <field name="amount_total_text" class="oe_subtotal_footer oe_right"/>
+                    </div>
+                    <div>
+                        <field name="comment" class="oe_inline" placeholder="Additional notes..."/>
+                    </div>
+
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

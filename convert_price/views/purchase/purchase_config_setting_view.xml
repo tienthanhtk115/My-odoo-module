@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="setting_view" model="ir.ui.view">
+            <field name="model">purchase.config.settings</field>
+            <field name="inherit_id" ref="purchase.view_purchase_configuration"/>
+            <field name="arch" type="xml">
+                <xpath expr='/form/group[2]' position="after">
+                    <group string="Language setting">
+                    <field name="language_option" widget="radio"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

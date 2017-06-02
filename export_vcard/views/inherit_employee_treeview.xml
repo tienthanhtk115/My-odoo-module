@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <data>
+
+        <record model="ir.ui.view" id="inherit_employee_view">
+
+            <field name="name">inherit view</field>
+
+            <field name="model">hr.employee</field>
+
+            <field name="inherit_id" ref="hr.view_employee_tree"/>
+
+            <field name="arch" type="xml">
+
+                <xpath expr="//tree/field[@name='name']" position="after">
+                    <field name="mobile_phone"/>
+                </xpath>
+
+            </field>
+
+        </record>
+
+    </data>
+
+</odoo>

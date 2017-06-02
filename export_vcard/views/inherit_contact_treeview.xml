@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <data>
+
+        <record model="ir.ui.view" id="inherit_contact_view">
+
+            <field name="name">inherit view</field>
+
+            <field name="model">res.partner</field>
+
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+
+            <field name="arch" type="xml">
+
+                <xpath expr="//tree/field[@name='phone']" position="after">
+                    <field name="mobile"/>
+                </xpath>
+                <xpath expr="//tree/field[@name='parent_id']" position="replace">
+                    <field name="parent_id"/>
+                </xpath>
+                <xpath expr="//tree/field[@name='parent_id']" position="after">
+                    <field name="title"/>
+                </xpath>
+
+            </field>
+
+        </record>
+
+    </data>
+
+</odoo>

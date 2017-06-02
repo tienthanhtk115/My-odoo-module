@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="wizard_export_contact" model="ir.ui.view">
+            <field name="name">Export Contact</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <form string="Export Contact">
+                    <group>
+                        <p>Here is the exported file:
+                            <field name="data" readonly="1" filename="file_name"/>
+                        </p>
+                    </group>
+                    <footer>
+                        <button special="cancel" string="Close" type="object" class="btn-primary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_wizard_export_contact" model="ir.actions.act_window">
+            <field name="name">Export Contact</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="src_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

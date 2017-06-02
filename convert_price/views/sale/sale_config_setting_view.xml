@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="price_convert_config" model="ir.ui.view">
+        <field name="name">Pham Quoc An</field>
+        <field name="model">sale.config.settings</field>
+        <field name="inherit_id" ref="sale.view_sales_config"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='customers']" position="after">
+                <group string="Language setting" name="language_setting">
+                    <field name="language_option" widget="radio"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

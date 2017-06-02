@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-extend="Product">
+        <t t-jquery=".product-name" t-operation="append">
+            <div>
+                <t t-if="product.qty_available==0">
+                    <span>Quantity in hand: </span>
+                    <span style="color:red">
+                        <t t-esc="product.qty_available"/>
+                    </span>
+                </t>
+                <t t-if="product.qty_available>0">
+                     <span>Quantity in hand: </span>
+                    <t t-esc="product.qty_available"/>
+                </t>
+            </div>
+        </t>
+    </t>
+</templates>

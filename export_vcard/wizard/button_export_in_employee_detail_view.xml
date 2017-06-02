@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_employee2" model="ir.ui.view">
+        <field name="name">view.hr.employee.form.website2</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='toggle_active']" position="after">
+                <button string="Download" type="object" name="download" class="oe_stat_button" icon="fa-archive"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_employee" model="ir.ui.view">
+        <field name="name">view.hr.employee.form.website</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.hr_kanban_view_employees"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='o_kanban_button']" position="after">
+                <button class="btn btn-sm btn-primary update_sales_button" type="object" name="download">Download
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

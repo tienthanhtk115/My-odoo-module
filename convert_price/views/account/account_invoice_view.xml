@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="account_invoice_inherit" model="ir.ui.view">
+        <field name="name">test</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[1]" position="replace">
+                <page string="Invoice Lines">
+                    <field name="invoice_line_ids" nolabel="1" widget="one2many_list" mode="tree,kanban"
+                           context="{'type': type, 'journal_id': journal_id, 'default_invoice_id': id}">
+                        <tree string="Invoice Lines" editable="bottom">
+                            <field name="sequence" widget="handle"/>
+                            <field name="product_id"/>
+                            <field name="origin" invisible="1"/>
+                            <field name="name"/>
+                            <field name="company_id" invisible="1"/>
+                            <field name="account_id" groups="account.group_account_user"
+                                   domain="[('company_id', '=', parent.company_id), ('internal_type', '=', 'other')]"/>
+                            <field name="account_analytic_id" groups="analytic.group_analytic_accounting"
+                                   domain="[('company_id', '=', parent.company_id)]"/>
+                            <field name="analytic_tag_ids" groups="analytic.group_analytic_accounting"
+                                   widget="many2many_tags"/>
+                            <field name="quantity"/>
+                            <field name="uom_id" groups="product.group_uom"/>
+                            <field name="price_unit"/>
+                            <field name="discount" groups="base.group_no_one"/>
+                            <field name="invoice_line_tax_ids" widget="many2many_tags" context="{'type':parent.type}"
+                                   domain="[('type_tax_use','=','sale'),('company_id', '=', parent.company_id)]"
+                                   options="{'no_create': True}"/>
+                            <field name="price_subtotal"/>
+                            <field name="currency_id" invisible="1"/>
+                        </tree>
+                        <kanban class="o_kanban_mobile">
+                            <field name="product_id"/>
+                            <field name="price_subtotal"/>
+                            <field name="quantity"/>
+                            <field name="uom_id" groups="product.group_uom"/>
+                            <templates>
+                                <t t-name="kanban-box">
+                                    <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <strong>
+                                                    <span>
+                                                        <t t-esc="record.product_id.value or 'None'"/>
+                                                    </span>
+                                                </strong>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-8 text-muted">
+                                                <span>
+                                                    <t t-esc="record.quantity.value"/>
+                                                    <t t-esc="record.uom_id.value"/>
+                                                </span>
+                                            </div>
+                                            <div class="col-xs-4 text-muted">
+                                                <span class="text-right">
+                                                    <t t-esc="record.price_subtotal.value"/>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </templates>
+                        </kanban>
+                    </field>
+                    <group class="oe_subtotal_footer oe_right">
+                        <field name="amount_untaxed"/>
+                        <field name="amount_tax"/>
+                        <field name="amount_total" class="oe_subtotal_footer_separator"/>
+                        <field name="payments_widget" colspan="2" nolabel="1" widget="payment"/>
+                        <field name="residual" class="oe_subtotal_footer_separator"
+                               attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                        <field name="reconciled" invisible="1"/>
+                        <field name="outstanding_credits_debits_widget" colspan="2" nolabel="1" widget="payment"
+                               attrs="{'invisible': [('state', 'not in', 'open')]}"/>
+                    </group>
+                    <field name="comment" class="oe_inline" placeholder="Terms and conditions..."/>
+                    <div>
+                        <field name="amount_total_text"/>
+                    </div>
+                    <!--<group class="oe_subtotal_footer oe_right">-->
+                        <!--<field name="amount_untaxed" widget="monetary" options="{'currency_field': 'currency_id'}"/>-->
+                        <!--<field name="amount_tax" widget="monetary" options="{'currency_field': 'currency_id'}"/>-->
+                        <!--<div class="oe_subtotal_footer_separator oe_inline">-->
+                            <!--<label for="amount_total"/>-->
+                        <!--</div>-->
+                        <!--<field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary"-->
+                               <!--options="{'currency_field': 'currency_id'}"/>-->
+                    <!--</group>-->
+                    <!--<field name="notes" class="oe_inline"-->
+                           <!--placeholder="An administrator can set up default Terms and conditions in your Company settings."/>-->
+                    <!--<div class="oe_clear"/>-->
+                    <!--<div>-->
+                        <!--<field name="amount_total_text"/>-->
+                    <!--</div>-->
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

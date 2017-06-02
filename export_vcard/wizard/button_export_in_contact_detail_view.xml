@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partners2" model="ir.ui.view">
+        <field name="name">view.res.partner.form.website2</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='toggle_active']" position="after">
+                <button string="Download" type="object" name="download" class="oe_stat_button" icon="fa-archive"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_partners" model="ir.ui.view">
+        <field name="name">view.res.partner.form.website</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='oe_kanban_partner_links']" position="after">
+                <button class="btn btn-sm btn-primary update_sales_button" type="object" name="download">Download
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

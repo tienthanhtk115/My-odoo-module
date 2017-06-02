@@ -1,0 +1,11 @@
+<odoo>
+    <data>
+        <report
+                id="print_pricelist"
+                string="Print product price"
+                model="product.template"
+                report_type="qweb-pdf"
+                name="print_pricelist.product_price_list"
+                file="noname"/>
+    </data>
+</odoo>
