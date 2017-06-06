@@ -35,7 +35,7 @@ class DownloadContact(models.Model):
                 'data': out,
                 'file_name': 'contact_info.vcf'
             })
-        compose_form = self.env.ref('Export_Vcard.wizard_export_contact')
+        compose_form = self.env.ref('export_vcard.wizard_export_contact')
         return {
             'type': 'ir.actions.act_window',
             'res_model': 'res.partner',

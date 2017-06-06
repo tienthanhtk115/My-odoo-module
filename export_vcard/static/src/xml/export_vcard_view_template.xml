@@ -2,9 +2,9 @@
 
 <templates id="template" xml:space="preserve">
 <t t-name="viewsss">
-    <div class="o_cp_sidebar btn-group btn-group-sm">
-        <button class="btn btn-default export_treeview_xls" type="button" title="Export xls">
-            <i t-translation="off" class="fa fa-file-excel-o"></i>
+    <div t-if="widget.model == 'hr.employee' || widget.model == 'res.partner'" class="o_cp_sidebar btn-group btn-group-sm">
+        <button class="btn btn-default export_vcard" type="button" title="Export Vcard">
+            <i t-translation="off" class="fa fa-download"></i>
         </button>
     </div>
 </t>

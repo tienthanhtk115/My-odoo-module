@@ -9,7 +9,6 @@ from odoo.addons.web.controllers.main import serialize_exception, ExportFormat
 
 
 class VcardExport(ExportFormat, http.Controller):
-    @http.route('/web/export/csv', type='http', auth="user")
     @serialize_exception
     def index(self, data, token):
         return self.base(data, token)
@@ -68,42 +67,13 @@ class VcardExport(ExportFormat, http.Controller):
         fp.close()
         return data
 
-    def from_data(self, fields, rows):
-        fp = StringIO()
-        writer = csv.writer(fp, quoting=csv.QUOTE_ALL)
-
-        writer.writerow([name.encode('utf-8') for name in fields])
-
-        for data in rows:
-            row = []
-            for d in data:
-                if isinstance(d, unicode):
-                    try:
-                        d = d.encode('utf-8')
-                    except UnicodeError:
-                        pass
-                if d is False: d = None
-
-                # Spreadsheet apps tend to detect formulas on leading =, + and -
-                if type(d) is str and d.startswith(('=', '-', '+')):
-                    d = "'" + d
-
-                row.append(d)
-            writer.writerow(row)
-
-        fp.seek(0)
-        data = fp.read()
-        fp.close()
-        return data
-
-
 class ExcelExportView(VcardExport):
     def __getattribute__(self, name):
         if name == 'fmt':
             raise AttributeError()
         return super(ExcelExportView, self).__getattribute__(name)
 
-    @http.route('/web/export/xls_view', type='http', auth='user')
+    @http.route('/web/export/vcard', type='http', auth='user')
     def export_xls_view(self, data, token):
         data = json.loads(data)
         model = data.get('model', [])
@@ -122,16 +92,6 @@ class ExcelExportView(VcardExport):
         elif model == 'hr.employee':
             return http.request.make_response(
                 self.from_data_employee(columns_headers, rows),
-                headers=[
-                    ('Content-Disposition', 'attachment; filename="%s"'
-                     % self.filename(model)),
-                    ('Content-Type', self.content_type)
-                ],
-                cookies={'fileToken': token}
-            )
-        else:
-            return http.request.make_response(
-                self.from_data(columns_headers, rows),
                 headers=[
                     ('Content-Disposition', 'attachment; filename="%s"'
                      % self.filename(model)),

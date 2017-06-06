@@ -1,13 +1,61 @@
-odoo.define('web_export_view', function (require) {
+odoo.define('calendar_export_view', function (require) {
 "use strict";
+
+    var lst_view = require('web.ListView');
+    lst_view.include({
+     render_sidebar: function($node) {
+        if (!this.sidebar && this.options.sidebar) {
+            this.sidebar = new Sidebar(this, {
+                editable: this.is_action_enabled('edit'),
+                model: this.model
+            });
+            if (this.fields_view.toolbar) {
+                this.sidebar.add_toolbar(this.fields_view.toolbar);
+            }
+            this.sidebar.add_items('other', _.compact([
+                { label: _t("Export"), callback: this.on_sidebar_export },
+                this.fields_view.fields.active && {label: _t("Archive"), callback: this.do_archive_selected},
+                this.fields_view.fields.active && {label: _t("Unarchive"), callback: this.do_unarchive_selected},
+                this.is_action_enabled('delete') && { label: _t('Delete'), callback: this.do_delete_selected }
+            ]));
+
+            $node = $node || this.options.$sidebar;
+            this.sidebar.appendTo($node);
+
+            // Hide the sidebar by default (it will be shown as soon as a record is selected)
+            this.sidebar.do_hide();
+        }
+    },
+    });
 
     var core = require('web.core');
     var Sidebar = require('web.Sidebar');
     var QWeb = core.qweb;
-
     var _t = core._t;
 
     Sidebar.include({
+        init: function(parent, options) {
+        var self = this;
+        this._super(parent, options);
+        this.options = _.defaults(options || {}, {
+            'editable': true,
+        });
+        this.model = options.model;
+        this.sections = options.sections || [
+            {name: 'print', label: _t('Print')},
+            {name: 'other', label: _t('Action')},
+        ];
+        this.items = options.items || {
+            print: [],
+            other: [],
+        };
+        this.fileupload_id = _.uniqueId('oe_fileupload');
+        $(window).on(this.fileupload_id, function() {
+            var args = [].slice.call(arguments).slice(1);
+            self.do_attachement_update(self.dataset, self.model_id,args);
+            framework.unblockUI();
+        });
+    },
 
         redraw: function () {
             var self = this;
@@ -86,7 +134,7 @@ odoo.define('web_export_view', function (require) {
                 });
             }
             view.session.get_file({
-                url: '/web/export/xls_view',
+                url: '/calendar/export',
                 data: {data: JSON.stringify({
                     model: view.model,
                     headers: export_columns_names,
@@ -97,4 +145,10 @@ odoo.define('web_export_view', function (require) {
         }
 
     });
+
+
+
+
+
 });
+

@@ -17,7 +17,7 @@
         <field name="inherit_id" ref="base.res_partner_kanban_view"/>
         <field name="arch" type="xml">
             <xpath expr="//div[@class='oe_kanban_partner_links']" position="after">
-                <button class="btn btn-sm btn-primary update_sales_button" type="object" name="download">Download
+                <button class="fa fa-download" type="object" name="download">
                 </button>
             </xpath>
         </field>

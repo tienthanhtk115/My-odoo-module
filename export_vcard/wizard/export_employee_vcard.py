@@ -36,7 +36,7 @@ class ExportEmployee(models.Model):
                 'file_name': 'contact_info.vcf'
             })
 
-        compose_form = self.env.ref('Export_Vcard.wizard_employee_vcard')
+        compose_form = self.env.ref('export_vcard.wizard_employee_vcard')
         return {
             'type': 'ir.actions.act_window',
             'res_model': 'hr.employee',

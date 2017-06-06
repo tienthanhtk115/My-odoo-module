@@ -17,7 +17,7 @@
         <field name="inherit_id" ref="hr.hr_kanban_view_employees"/>
         <field name="arch" type="xml">
             <xpath expr="//div[@class='o_kanban_button']" position="after">
-                <button class="btn btn-sm btn-primary update_sales_button" type="object" name="download">Download
+                <button class="fa fa-download" type="object" name="download">
                 </button>
             </xpath>
         </field>

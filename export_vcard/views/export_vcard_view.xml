@@ -3,7 +3,7 @@
 <odoo>
     <template id="assets_backend" name="web_export_view assets" inherit_id="web.assets_backend">
         <xpath expr="." position="inside">
-            <script type="text/javascript" src="/export_vcard/static/src/js/web_export_view.js"></script>
+            <script type="text/javascript" src="/export_vcard/static/src/js/web_export_view_1.js"></script>
         </xpath>
     </template>
 </odoo>
