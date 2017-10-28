@@ -2,7 +2,7 @@
 {
     'name': "sale_order_send_mail",
 
-    'author': "evan@trueplus.vn",
+    'author': "",
 
     # 'website': "http://www.yourcompany.com",
 
