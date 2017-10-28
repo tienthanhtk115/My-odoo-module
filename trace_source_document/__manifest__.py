@@ -9,8 +9,8 @@
         Add link source document
     """,
 
-    'author': "Magestore.com",
-    'website': "magestore.com",
+    'author': "",
+    'website': "",
 
 
     'category': 'Tools',
