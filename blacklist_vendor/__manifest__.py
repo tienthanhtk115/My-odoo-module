@@ -7,8 +7,8 @@
     'description': """
         Notify while create purchase order in case the vendor in black list
     """,
-    'author': "Magestore.com",
-    'website': "Magestore.com",
+    'author': "",
+    'website': "",
     'data': [
         'view/vendor_view.xml',
         'view/setting.xml'
