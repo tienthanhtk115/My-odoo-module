@@ -9,8 +9,8 @@
         Printing pricelist from product
     """,
 
-    'author': "Magestore",
-    'website': "http://www.magestore.com",
+    'author': "",
+    'website': "",
 
     'category': 'Tools',
     'version': '0.1',
