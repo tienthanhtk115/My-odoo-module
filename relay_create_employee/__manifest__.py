@@ -12,8 +12,8 @@
     + when you deleted an user, associate employee will be deleted
     + when you edit the user, if login changed --> work_email of employee will be changed""",
 
-    'author': "Magestore.com",
-    'website': "Magestore.com",
+    'author': "",
+    'website': "",
 
     'category': 'Tools',
     'version': '1.0',
