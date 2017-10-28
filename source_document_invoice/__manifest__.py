@@ -7,8 +7,8 @@
     'description': """
        Add link source document for invoice
     """,
-    'author': "Magestore.com",
-    'website': "magestore.com",
+    'author': "",
+    'website': "",
     'category': 'Tools',
     'version': '0.1',
     'depends': ['base','account','sale'],
