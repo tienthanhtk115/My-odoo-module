@@ -10,8 +10,8 @@
         Module for helping quantity of product. If quantity of product = 0, display 0 in red color and warning user cannot sell this product
     """,
 
-    'author': "Magestore",
-    'website': "http://www.Magestore.com",
+    'author': "",
+    'website': "",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/master/odoo/addons/base/module/module_data.xml
