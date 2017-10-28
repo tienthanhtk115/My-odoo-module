@@ -9,8 +9,8 @@
        This modules allows you to integrate Google reCAPTCHA v2.0 to require captcha while login, register, forget password your website
     """,
 
-    'author': "Magestore.com",
-    'website': "http://www.magestore.com",
+    'author': "",
+    'website': ""
 
     'category': 'Tools',
     'version': '0.1',
